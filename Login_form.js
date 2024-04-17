@@ -17,9 +17,15 @@ const Login=(e)=>{
       },
       body: JSON.stringify({email,pwd}),
     }).catch((err)=>{console.log(err)})
-    .then((response)=>{
-      if(response.ok){
-        console.log(response.json());
+    .then(response => {
+      return response.json()
+    })
+    .then(json => {
+      if(json.success){
+        //
+      }
+      else{
+        alert(json.error)
       }
     })
  }

@@ -21,10 +21,19 @@ const sendotp=(e)=>{
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({username,email,pwd}),
-    }).then((data)=>{
-      if(data.ok){
-        setswitcher(2);
-    }}).catch((err)=>{
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then(json => {
+      if(json.success){
+        setswitcher(2)
+      }
+      else{
+        alert(json.error)
+      }
+    })
+    .catch((err)=>{
       console.log(err);
     })
   }
@@ -39,10 +48,19 @@ const sendotp=(e)=>{
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({otp,username,email,pwd}),
-    }).then((data)=>{
-      if(data.ok){
-        setswitcher(2);
-    }}).catch((err)=>{
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then(json => {
+      if(json.success){
+        //
+      }
+      else{
+        alert(json.error)
+      }
+    })
+    .catch((err)=>{
       console.log(err);
     })
  }
