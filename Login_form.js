@@ -10,12 +10,17 @@ const[pwd,setpwd]=useState('')
 
 const Login=(e)=>{
     e.preventDefault();
-    fetch("http://localhost:3000/Login",{
+    fetch("http://localhost:3003/api/auth/login",{
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({email,pwd}),
+    }).catch((err)=>{console.log(err)})
+    .then((response)=>{
+      if(response.ok){
+        console.log(response.json());
+      }
     })
  }
 

@@ -7,6 +7,7 @@ const [username,setusername]=useState('');
 const[switcher,setswitcher]=useState(0);
 const[pwd,setpwd]=useState('');
 const[conpwd,setconpwd]=useState('');
+const[otp,setotp]=useState('');
 
 
 const sendotp=(e)=>{
@@ -14,16 +15,37 @@ const sendotp=(e)=>{
   if(pwd!=conpwd){
     window.alert("Password doesnot match");
   }else{
-    fetch("http://localhost:3000/api/auth/send-otp",{
+    fetch("http://localhost:3003/api/auth/send-otp",{
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({username,email,pwd}),
+    }).then((data)=>{
+      if(data.ok){
+        setswitcher(2);
+    }}).catch((err)=>{
+      console.log(err);
     })
   }
  }
 
+ const verifyotp=(e)=>{
+  e.preventDefault();
+  console.log("GOTIT");
+  fetch("http://localhost:3003/api/auth/signup",{
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({otp,username,email,pwd}),
+    }).then((data)=>{
+      if(data.ok){
+        setswitcher(2);
+    }}).catch((err)=>{
+      console.log(err);
+    })
+ }
 const ChangePage=()=>{
   setswitcher(1)
 }
@@ -57,15 +79,29 @@ const ChangePage2=()=>{
         <h3>Set Password</h3>
 
         <label htmlFor="UserName" >Password</label>
-        <input type="text" placeholder="Password" id="username" onChange={(e)=>{setpwd(e.target.value)}} />
+        <input type="password" placeholder="Password" id="username" onChange={(e)=>{setpwd(e.target.value)}} />
 
         <label htmlFor="Email" >Confirm Password</label>
-        <input type="text" placeholder="Confirm Password" id="username" onChange={(e)=>{setconpwd(e.target.value)}} />
+        <input type="password" placeholder="Confirm Password" id="username" onChange={(e)=>{setconpwd(e.target.value)}} />
 
         <button onClick={sendotp} >Send OTP</button>
         <button style={{width:"30%"}} onClick={ChangePage2}>Back</button>
       </form>
     </div>
+  }else if(switcher==2){
+    return <div className="background">
+    <div className="shape"></div>
+    <div className="shape"></div>
+    <form>
+      <h3>Verify OTP</h3>
+
+      <label htmlFor="OTP" >OTP</label>
+      <input type="text" placeholder="OTP" id="otpInput" value={otp} onChange={(e)=>{setotp(e.target.value)}} />
+
+      <button onClick={verifyotp} >Verify OTP</button>
+      <button style={{width:"30%"}} onClick={ChangePage2}>Back</button>
+    </form>
+  </div>
   }
 };
 
