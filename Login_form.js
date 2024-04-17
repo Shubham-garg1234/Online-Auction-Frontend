@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './Auth.css';
 
 const LoginForm = () => {
 
@@ -31,7 +32,7 @@ const Login=(e)=>{
  }
 
   return (
-    <div className="background">
+    <div className="background" >
       <div className="shape"></div>
       <div className="shape"></div>
       <form onSubmit={Login}>
