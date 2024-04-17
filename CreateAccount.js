@@ -77,7 +77,7 @@ const ChangePage2=()=>{
       <div className="shape"></div>
       <div className="shape"></div>
       <div>
-      <form >
+      <form className="AuthForm">
         <h3>Create Account</h3>
 
         <label htmlFor="UserName" >Username</label>
@@ -86,7 +86,7 @@ const ChangePage2=()=>{
         <label htmlFor="Email" >Email</label>
         <input type="text" placeholder="Email" id="username" onChange={(e)=>{setemail(e.target.value)}} />
 
-        <button onClick={ChangePage}>Next</button>
+        <button className="AuthButton" onClick={ChangePage}>Next</button>
       </form>
       </div>
     </div>
@@ -94,7 +94,7 @@ const ChangePage2=()=>{
     return <div className="background">
       <div className="shape"></div>
       <div className="shape"></div>
-      <form>
+      <form className="AuthForm">
         <h3>Set Password</h3>
 
         <label htmlFor="UserName" >Password</label>
@@ -103,22 +103,21 @@ const ChangePage2=()=>{
         <label htmlFor="Email" >Confirm Password</label>
         <input type="password" placeholder="Confirm Password" id="username" onChange={(e)=>{setconpwd(e.target.value)}} />
 
-        <button onClick={sendotp} >Send OTP</button>
-        <button style={{width:"30%"}} onClick={ChangePage2}>Back</button>
+        <button className="AuthButton" onClick={sendotp} >Send OTP</button>
+        <button className="AuthButton" style={{marginTop:"15px" , width:"30%"}} onClick={ChangePage2}>Back</button>
       </form>
     </div>
   }else if(switcher==2){
     return <div className="background">
     <div className="shape"></div>
     <div className="shape"></div>
-    <form>
+    <form className="AuthForm">
       <h3>Verify OTP</h3>
 
       <label htmlFor="OTP" >OTP</label>
       <input type="text" placeholder="OTP" id="otpInput" value={otp} onChange={(e)=>{setotp(e.target.value)}} />
 
-      <button onClick={verifyotp} >Verify OTP</button>
-      <button style={{width:"30%"}} onClick={ChangePage2}>Back</button>
+      <button className="AuthButton" onClick={verifyotp} >Verify OTP</button>
     </form>
   </div>
   }

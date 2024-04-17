@@ -96,13 +96,13 @@ import './Auth.css';
       <div className="background">
         <div className="shape"></div>
         <div className="shape"></div>
-        <form onSubmit={sendotp}>
+        <form className="AuthForm" onSubmit={sendotp}>
           <h3>Reset Password</h3>
 
           <label htmlFor="Email" >Email</label>
           <input type="text" placeholder="Email" id="username" onChange={(e)=>{setemail(e.target.value)}} />
 
-          <button>Send OTP</button>
+          <button className="AuthButton">Send OTP</button>
         </form>
       </div>
     );
@@ -111,13 +111,13 @@ import './Auth.css';
     return <div className="background">
       <div className="shape"></div>
       <div className="shape"></div>
-      <form>
+      <form className="AuthForm">
         <h3>Verify OTP</h3>
 
         <label htmlFor="OTP" >OTP</label>
         <input type="text" placeholder="OTP" id="otpInput" value={otp} onChange={(e)=>{setOtp(e.target.value)}} />
 
-        <button onClick={verifyotp} >Verify OTP</button>
+        <button className="AuthButton" onClick={verifyotp} >Verify OTP</button>
       </form>
     </div>
  }
@@ -125,7 +125,7 @@ import './Auth.css';
     return <div className="background">
     <div className="shape"></div>
     <div className="shape"></div>
-    <form>
+    <form className="AuthForm">
       <h3>Set Password</h3>
 
       <label htmlFor="UserName" >Password</label>
@@ -134,7 +134,7 @@ import './Auth.css';
       <label htmlFor="Email" >Confirm Password</label>
       <input type="password" value = {conpwd} placeholder="Confirm Password" id="username" onChange={(e)=>{setconpwd(e.target.value)}} />
 
-      <button onClick={resetPass} >Reset</button>
+      <button className="AuthButton" onClick={resetPass} >Reset</button>
     </form>
   </div>
  }

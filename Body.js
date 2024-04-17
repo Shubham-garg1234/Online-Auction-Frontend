@@ -1,6 +1,7 @@
 import Crausel from "./Crausel";
 import './Home.css';
 
+
 const Body=()=>{
     return (<>
     <div className="HomeBody">

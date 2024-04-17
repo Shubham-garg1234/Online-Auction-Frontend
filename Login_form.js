@@ -35,7 +35,7 @@ const Login=(e)=>{
     <div className="background" >
       <div className="shape"></div>
       <div className="shape"></div>
-      <form onSubmit={Login}>
+      <form className="AuthForm" onSubmit={Login}>
         <h3>Login Here</h3>
 
         <label htmlFor="Email" >Email</label>
@@ -43,7 +43,7 @@ const Login=(e)=>{
 
         <label htmlFor="password" >Password</label>
         <input type="password" placeholder="Password" id="password" onChange={(e)=>{setpwd(e.target.value)}}/>
-        <button>Log In</button>
+        <button className="AuthButton">Log In</button>
         <div className="social">
             <div className="go"><i className="fab fa-google"></i> <Link to="/Forgot_password"> Forgot Password</Link> </div>
             <div className="fb"><i className="fab fa-facebook"></i>  <Link to="/Create_Account"> Create Account </Link></div>
