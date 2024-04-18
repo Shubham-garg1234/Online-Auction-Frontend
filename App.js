@@ -6,6 +6,7 @@ import Forgotpwd from "./Forgot_pwd";
 import Create_Account from "./CreateAccount";
 import Home from "./Home";
 
+
 const root=ReactDOM.createRoot(document.getElementById("root"));
 
 const Router =createBrowserRouter([{
@@ -24,7 +25,7 @@ const Router =createBrowserRouter([{
     path:"/Home",
     element:<Home/>,
     errorElement:<Error/>,
-}
+},
 ])
 
 root.render(<RouterProvider router={Router} />);
