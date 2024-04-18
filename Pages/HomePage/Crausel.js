@@ -1,8 +1,8 @@
 const Crausel=()=>{
 
-    const img1=require("./image.png");
-    const img2=require("./th (1).jpeg");
-    const img3=require("./th (2).jpeg");
+    const img1=require('../../assets/images/image.png');
+    const img2=require('../../assets/images/th (1).jpeg');
+    const img3=require('../../assets/images/th (2).jpeg');
 
     return (<>
         <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">

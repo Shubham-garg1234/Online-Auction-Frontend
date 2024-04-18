@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Auth.css';
+import '../../assets/css/Auth.css';
 
 const Create_Account = () => {
 

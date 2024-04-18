@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './Home.css';
+import '../../assets/css/Home.css';
 
 
 const Header = () => {
@@ -10,9 +10,9 @@ const Header = () => {
 
     const searchparams = new URLSearchParams(window.location.search);
     const token = searchparams.get("token");
-    const logo = require('./th.jpeg');
-    const [userName,setuserName]=useState("User");
-    const [coins,setcoins]=useState(0);
+    const logo = require('../../assets/images/th.jpeg');
+    const [user , setUser] = useState(null)
+
 
     const details = () => {
 
@@ -31,13 +31,11 @@ const Header = () => {
           .then(data=>data.json())
           .then(
             (data2) => (
-                console.log(data2)
-            //   setcoins(data.coin),
-            //   setuserName(data.username)
+                console.log(data2),
+                setUser(data2.user)
             )
           )
       };
-
 
     return (
         <header>
@@ -53,7 +51,7 @@ const Header = () => {
                     <li className="dropdown">
                         <div className="btn-group">
                             <div type="div" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-box-button">
-                                Welcome {userName}
+                                Welcome {user ? user.name : ''}
                             </div>
                             <ul className="dropdown-menu dropdown-menu-start">
                                 <li><button className="dropdown-item" type="button">Add Coins</button></li>
@@ -62,7 +60,7 @@ const Header = () => {
                             </ul>
                         </div>
                     </li>
-                    <li>🪙 Coins</li>
+                    <li>🪙 {user ? user.coins : 0}</li>
                 </ul>
             </nav>
         </header>
@@ -70,3 +68,4 @@ const Header = () => {
 }
 
 export default Header;
+

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./DialogBox.css";
+import '../../assets/css/DialogBox.css';
 import Crausel from "./Crausel";
 import { Cloudinary } from "@cloudinary/url-gen";
 

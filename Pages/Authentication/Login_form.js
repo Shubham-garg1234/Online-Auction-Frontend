@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Auth.css';
+import '../../assets/css/Auth.css';
 
 const LoginForm = () => {
 

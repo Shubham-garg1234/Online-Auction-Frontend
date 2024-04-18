@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client"
-import LoginForm from "./Login_form";
+import LoginForm from "./Pages/Authentication/Login_form";
 import { createBrowserRouter ,RouterProvider} from "react-router-dom";
-import Forgotpwd from "./Forgot_pwd";
-import Create_Account from "./CreateAccount";
-import Home from "./Home";
+import Forgotpwd from "./Pages/Authentication/Forgot_pwd";
+import Create_Account from "./Pages/Authentication/CreateAccount";
+import Home from "./Pages/HomePage/Home";
+
 
 const root=ReactDOM.createRoot(document.getElementById("root"));
 
@@ -24,7 +25,7 @@ const Router =createBrowserRouter([{
     path:"/Home",
     element:<Home/>,
     errorElement:<Error/>,
-}
+},
 ])
 
 root.render(<RouterProvider router={Router} />);
