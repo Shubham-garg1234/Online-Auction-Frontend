@@ -23,7 +23,8 @@ const Login=(e)=>{
     })
     .then(json => {
       if(json.success){
-        //
+        const token=json.authToken;
+        window.location.href = "http://localhost:1234/Home?token=" + token;
       }
       else{
         alert(json.error)
