@@ -3,7 +3,6 @@ import '../../assets/css/Home.css';
 
 
 const Header = ({onSwitcherChange}) => {
-
     useEffect(()=>{
         details();
     },[])

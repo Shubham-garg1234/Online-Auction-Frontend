@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import '../../assets/css/DialogBox.css';
 import Crausel from "./Crausel";
 import { Cloudinary } from "@cloudinary/url-gen";
+import UpcomingAuction from "./UpcomingAuction";
 
 const Body = ({ switcher }) => {
   const [itemName, setItemName] = useState("");
@@ -167,9 +168,7 @@ const Body = ({ switcher }) => {
     </div>
   );}
   else if(switcher=="Upcoming Auctions"){
-    return(<>
-    Upcoming
-    </>)
+    return(<UpcomingAuction/>)
   }else if(switcher=="Live Auctions"){
     return(<>
     Live
