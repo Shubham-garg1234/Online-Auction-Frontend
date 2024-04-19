@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import '../../assets/css/Home.css';
 
 
-const Header = () => {
+const Header = ({onSwitcherChange}) => {
 
     useEffect(()=>{
         details();
@@ -12,7 +12,6 @@ const Header = () => {
     const token = searchparams.get("token");
     const logo = require('../../assets/images/th.jpeg');
     const [user , setUser] = useState(null)
-
 
     const details = () => {
 
@@ -41,13 +40,13 @@ const Header = () => {
         <header>
             <div className="logo">
                 <img src={logo} alt="Logo" style={{width:"20vh"}}/>
-                <b style={{fontFamily:"Cambria", fontSize:"24px"}}> &nbsp; FastBid</b>
+                <b onClick={() => onSwitcherChange("Home")} style={{cursor:"pointer" ,fontFamily:"Cambria", fontSize:"24px"}}> &nbsp; FastBid</b>
             </div>
             <nav>
                 <ul className="navigation">
-                    <li>History</li>
-                    <li>Live Auctions</li>
-                    <li>Upcoming Auctions</li>
+                    <li onClick={() => onSwitcherChange("History")}>History</li>
+                    <li onClick={() => onSwitcherChange("Live Auctions")}>Live Auctions</li>
+                    <li onClick={() => onSwitcherChange("Upcoming Auctions")}>Upcoming Auctions</li>
                     <li className="dropdown">
                         <div className="btn-group">
                             <div type="div" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-box-button">

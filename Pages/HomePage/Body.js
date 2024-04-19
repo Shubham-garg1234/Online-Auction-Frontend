@@ -3,7 +3,7 @@ import '../../assets/css/DialogBox.css';
 import Crausel from "./Crausel";
 import { Cloudinary } from "@cloudinary/url-gen";
 
-const Body = () => {
+const Body = ({ switcher }) => {
   const [itemName, setItemName] = useState("");
   const [startingPrice, setStartingPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -79,7 +79,7 @@ const Body = () => {
       })
       ;
   };
-
+  if(switcher=="Home"){
   return (
     <div className="HomeBody">
       <div className="crausel">
@@ -165,7 +165,20 @@ const Body = () => {
         </div>
       </div>
     </div>
-  );
+  );}
+  else if(switcher=="Upcoming Auctions"){
+    return(<>
+    Upcoming
+    </>)
+  }else if(switcher=="Live Auctions"){
+    return(<>
+    Live
+    </>)
+  }else if(switcher=="History"){
+    return(<>
+    History
+    </>)
+  }
 };
 
 export default Body;
