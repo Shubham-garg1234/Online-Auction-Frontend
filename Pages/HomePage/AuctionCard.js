@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import '../../assets/css/AuctionCard.css'
 
 const AuctionCard = ({ details }) => {
-    const itemsArray = details.items.map(data => data.id);
+    const AuctionName=details.name;
+    const itemsArray = details.items.map(data => data.id); 
     const searchParams = new URLSearchParams(window.location.search);
     const token = searchParams.get("token");
     const [items, setItems] = useState(null);
@@ -31,14 +33,23 @@ const AuctionCard = ({ details }) => {
 
     return (
         <>
+            <div className="AuctionCard-container">
+            <h1 className="auction-card-heading">{AuctionName}</h1>
             {items && items.map((item, index) => (
-                <div key={index}>
-                    <p>{item.name}</p>
-                    <p>{item.description}</p>
-                    <p>{item.starting_price}</p>
-                    <p>{item.image}</p>
+                <div className="AuctionCard-box" key={index}>
+                    <div>
+                    <h3>{index+1}. {item.name}</h3>
+                    <br></br>
+                    <br></br>
+                    <p><b>Description:</b> {item.description}</p>
+                    <p><b>Starting Price:</b> {item.starting_price} coins</p>
+                    </div>
+                    <div>
+                    <img src={item.image} />
+                    </div>
                 </div>
             ))}
+            </div>
         </>
     );
 }

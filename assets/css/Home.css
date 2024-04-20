@@ -1,6 +1,7 @@
 /* Home.css */
 .page-container {
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     background-color: rgb(78, 73, 73);
 }
 

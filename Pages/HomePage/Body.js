@@ -43,23 +43,21 @@ const Body = ({ switcher }) => {
       body: data,
     })
       .then((response) => response.json())
-      .then((data) => {
-        if (data.secure_url) {
-          setImageUrl(data.secure_url);
-        }
+      .then((data)=>(data.url))
+      .then((url) => {
+        return url
       })
       .catch((error) => {
         console.error("Error uploading image to Cloudinary:", error);
-      }).then(()=>{
-
-      }).then(()=>{
+      }).then((url)=>{
+        console.log(url)
         fetch("http://localhost:3003/api/auth/uploaditems",{
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             "auth-token": token
           },
-          body: JSON.stringify({ imageUrl,itemName,description,startingPrice }),
+          body: JSON.stringify({ url,itemName,description,startingPrice }),
         }).catch((err)=>{console.log(err)})
         .then(response => {
           return response.json()
@@ -68,7 +66,6 @@ const Body = ({ switcher }) => {
           setDescription("");
           setItemName("");
           setImage("");
-          setImageUrl("");
           setStartingPrice("");
           setImagePreview("");
           if(json.message){
