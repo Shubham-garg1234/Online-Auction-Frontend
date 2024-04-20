@@ -8,8 +8,35 @@ export default function LiveAuction({ auction }) {
   const token = searchparams.get("token");
   const[timerclass,settimerclass]=useState('timer');
 
-  const[timer,settimer]=useState(20);
+  const [completed , setCompleted] = useState(false)
+
+  const[timer,settimer]=useState(10);
   const [biddingItem , setbiddingItem] = useState(null)
+
+  const fetchNextBiddingItem = () => {
+    fetch("http://localhost:3003/api/auth/fetchNextBiddingItem",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": token
+      },
+      body: JSON.stringify({ auctionId: auction._id }),
+    })
+    .catch((err)=>{console.log(err)})
+    .then(response => {
+      return response.json()
+    })
+    .then(json => {
+      console.log(json)
+      if(json.success){
+        setbiddingItem(json.currentBiddingItem)
+      }
+      else{
+        alert(json.message)
+        setCompleted(true)
+      }
+    })
+  }
 
   useEffect(()=>{
     const clock=setTimeout(()=>{
@@ -17,7 +44,8 @@ export default function LiveAuction({ auction }) {
         const time=timer-0.1;
         settimer(time.toFixed(1));
       }else if(timer==0){
-        settimer(20);
+        fetchNextBiddingItem()
+        settimer(10)
       }
       if(timer<=5){
         settimerclass('red-timer')
@@ -70,13 +98,11 @@ export default function LiveAuction({ auction }) {
     })
     .then(json => {
       console.log(json)
-      
+      if(!json.success){
+        alert(json.error)
+      }
     })
 
-  }
-
-  const fetchNextItem = () => {
-    
   }
 
   return (
@@ -97,12 +123,16 @@ export default function LiveAuction({ auction }) {
             <div className='outer-image'>
               <img className='' src = {require('../../assets/images/th.jpeg')} />
               <div className='button-container'>
-                <button onClick = {make_a_bid} className='bid-button'>Make a bid of {biddingItem ? biddingItem.current_bid === 0 ? biddingItem.starting_price : biddingItem.current_bid + 0.1 * biddingItem.current_bid : ''}</button>
+                <button onClick = {make_a_bid} className='bid-button'>Make a bid of {biddingItem ? biddingItem.current_bid === 0 ? biddingItem.starting_price : Math.ceil(biddingItem.current_bid + 0.1 * biddingItem.current_bid) : ''}</button>
             </div>
             </div>
           </div>
           <div>
-            <div className={timerclass}> {timer} </div>
+            {!completed ? 
+              <div className={timerclass}> {timer} </div>
+            :
+              <div>Auction Completed</div>
+            }
             <p className='description'>{biddingItem ? biddingItem.description : ''}</p>
           </div>
         </div>
