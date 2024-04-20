@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import '../../assets/css/Upcoming.css'
-import formatDate from "../../../Backend/Utils/FormatDate";
+import formatDate from "../../assets/Utils/FormatDate";
 import AuctionCard from "./AuctionCard";
+import LiveAuction from "./LiveAuction";
 
 const UpcomingAuction=()=>{
   const searchparams = new URLSearchParams(window.location.search);
@@ -19,6 +20,13 @@ const Auctiondetails=(index)=>{
     setswitcher("Auction-details");
 }
 
+const [liveAuction , setLiveAuction] = useState(null)
+
+const openLiveAuction = (auction) => {
+    setLiveAuction(auction)
+    setswitcher('Live-Auction')
+}
+ 
 const Getupcoming=()=>{
     fetch("http://localhost:3003/api/auth/getUpcoming",{
           method: "POST",
@@ -54,9 +62,15 @@ const Getupcoming=()=>{
                     <tbody>
                         {Upcoming && Upcoming.map((auction, index) => (
                             <tr key={index}>
-                                <td>{auction.name}</td>
+                                <td>{auction.name}{auction.status === 'live' ? <p className="liveLabel">(Live)</p> : ''}</td>
                                 <td>{formatDate(auction.starting_time)}</td>
-                                <td><button className="button-aution-table" onClick={()=>Auctiondetails(index)}>view</button></td>
+                                <td>
+                                    {auction.status === 'upcoming' ? 
+                                        <button className="button-aution-table" onClick={()=>Auctiondetails(index)}>view</button>
+                                    :
+                                        <button className="button-aution-table" onClick={()=>openLiveAuction(auction)}>Join</button>
+                                    }
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -65,6 +79,8 @@ const Getupcoming=()=>{
         </>
     }else if(switcher=="Auction-details"){
         return <AuctionCard details={Upcoming[ind]}/>
+    }else if(switcher=='Live-Auction'){
+        return <LiveAuction auction = {liveAuction} />
     }
 } 
 export default UpcomingAuction;
