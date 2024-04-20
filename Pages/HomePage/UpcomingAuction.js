@@ -26,6 +26,7 @@ const openLiveAuction = (auction) => {
     setLiveAuction(auction)
     setswitcher('Live-Auction')
 }
+
  
 const Getupcoming=()=>{
     fetch("http://localhost:3003/api/auth/getUpcoming",{
@@ -62,16 +63,21 @@ const Getupcoming=()=>{
                     <tbody>
                         {Upcoming && Upcoming.map((auction, index) => (
                             <tr key={index}>
-                                <td>{auction.name}{auction.status === 'live' ? <p className="liveLabel">(Live)</p> : ''}</td>
-                                <td>{formatDate(auction.starting_time)}</td>
-                                <td>
-                                    {auction.status === 'upcoming' ? 
-                                        <button className="button-aution-table" onClick={()=>Auctiondetails(index)}>view</button>
-                                    :
-                                        <button className="button-aution-table" onClick={()=>openLiveAuction(auction)}>Join</button>
-                                    }
-                                </td>
-                            </tr>
+                            <td>
+                                {auction.name}
+                                {new Date(auction.starting_time).getTime() <= Date.now() && (
+                                    <p className="liveLabel">(Live)</p>
+                                )}
+                            </td>
+                            <td>{formatDate(auction.starting_time)}</td>
+                            <td>
+                                {new Date(auction.starting_time).getTime() <= Date.now() ? (
+                                    <button className="button-aution-table" onClick={() => openLiveAuction(auction)}>Join</button>
+                                ) : (
+                                    <button className="button-aution-table" onClick={() => Auctiondetails(index)}>View</button>
+                                )}
+                            </td>
+                        </tr>
                         ))}
                     </tbody>
                 </table>

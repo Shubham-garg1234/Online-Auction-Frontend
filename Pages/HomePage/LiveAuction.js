@@ -35,8 +35,30 @@ export default function LiveAuction({ auction }) {
   }, [])
   
 
-  const make_a_bid = () => {
+  const make_a_bid = (event) => {
+    event.preventDefault()
 
+    fetch("http://localhost:3003/api/auth/make_a_bid",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": token
+      },
+      body: JSON.stringify({ auctionId: auction._id }),
+    })
+    .catch((err)=>{console.log(err)})
+    .then(response => {
+      return response.json()
+    })
+    .then(json => {
+      console.log(json)
+      
+    })
+
+  }
+
+  const fetchNextItem = () => {
+    
   }
 
   return (
@@ -48,7 +70,7 @@ export default function LiveAuction({ auction }) {
           <div>
             <p className='price'>Starting price:  {biddingItem ? biddingItem.starting_price : ''}</p>
             <p className='name'>Seller Name:  {biddingItem ? biddingItem.sellerName : ''}</p>
-            <p className='price'>Current Bid:  {biddingItem && biddingItem.current_bid ? biddingItem.current_bid : 'No Bid Yet'}</p>
+            <p className='price'>Last Bid:  {biddingItem && biddingItem.current_bid ? biddingItem.current_bid : 'No Bid Yet'}</p>
             <p className='name'>Bidder Name:  {biddingItem ? biddingItem.bidderName : ''}</p>
           </div>
           <div>
@@ -61,10 +83,11 @@ export default function LiveAuction({ auction }) {
           </div>
         </div>
         <div className='button-container'>
-          <button className='bid-button'>Make a bid of 5000</button>
+          <button onClick = {make_a_bid} className='bid-button'>Make a bid of {biddingItem ? biddingItem.current_bid === 0 ? biddingItem.starting_price : biddingItem.current_bid + 0.1 * biddingItem.current_bid : ''}</button>
         </div>
 
     </div>
   )
 }
+
 
