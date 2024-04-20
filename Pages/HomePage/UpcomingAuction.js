@@ -74,7 +74,8 @@ const Getupcoming=()=>{
                                 {new Date(auction.starting_time).getTime() <= Date.now() ? (
                                     <button className="button-aution-table" onClick={() => openLiveAuction(auction)}>Join</button>
                                 ) : (
-                                    <button className="button-aution-table" onClick={() => Auctiondetails(index)}>View</button>
+                                    //<button className="button-aution-table" onClick={() => Auctiondetails(index)}>
+                                        <button className="button-aution-table" onClick={() => openLiveAuction(auction)}>View</button>
                                 )}
                             </td>
                         </tr>
