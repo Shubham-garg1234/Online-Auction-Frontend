@@ -101,3 +101,13 @@
     font-size: 40px;
     text-shadow: 2px 2px 2px rgb(189, 10, 10);
   }
+  .outer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+  }
+  .completed{
+    color: white;
+    font-size: 50px;
+  }
