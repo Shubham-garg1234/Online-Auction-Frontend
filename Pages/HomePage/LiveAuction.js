@@ -12,36 +12,38 @@ export default function LiveAuction({ auction }) {
   const token = searchparams.get("token");
   const[timerclass,settimerclass]=useState('timer');
 
-  const[timer,settimer]=useState(1000000);
+  const[timer,settimer]=useState(20);
   const [biddingItem , setbiddingItem] = useState(null)
   const[bidamount,setbidamount]=useState(null);
   const[nextbid,setNextbid]=useState(null);
+  const[switcher,setswitcher]=useState("live")
 
 
-  const fetchNextBiddingItem = () => {
-    fetch("http://localhost:3003/api/auth/fetchNextBiddingItem",{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": token
-      },
-      body: JSON.stringify({ auctionId: auction._id }),
-    })
-    .catch((err)=>{console.log(err)})
-    .then(response => {
-      return response.json()
-    })
-    .then(json => {
-      console.log(json)
-      if(json.success){
-        setbiddingItem(json.currentBiddingItem)
-      }
-      else{
-        socket.emit('stopClock')
-        setCompleted(true)
-      }
-    })
-  }
+  // const fetchNextBiddingItem = () => {
+  //   console.log("fetching");
+  //   fetch("http://localhost:3003/api/auth/fetchNextBiddingItem",{
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "auth-token": token
+  //     },
+  //     body: JSON.stringify({ auctionId: auction._id }),
+  //   })
+  //   .catch((err)=>{console.log(err)})
+  //   .then(response => {
+  //     return response.json()
+  //   })
+  //   .then(json => {
+  //     console.log(json)
+  //     if(json.success){
+  //       setbiddingItem(json.currentBiddingItem)
+  //     }
+  //     else{
+  //       socket.emit('stopClock')
+  //       setCompleted(true)
+  //     }
+  //   })
+  // }
 
   useEffect(() => {
     socket.emit("join", token);
@@ -55,11 +57,25 @@ export default function LiveAuction({ auction }) {
       }
     });
 
-    socket.on('fetchNext' , () => {
-      fetchNextBiddingItem()
+    socket.on('fetchNext' , (message) => {
+      if(message.status=="hault"){
+        if(message.data.currentBiddingItem=="Auction Completed"){
+          socket.emit('stopClock')
+          setCompleted(true)
+        }
+        else{
+          console.log(message.data.currentBiddingItem);
+        setbiddingItem(message.data.currentBiddingItem);
+        setswitcher("hault");
+        settimer(60)
+      }
+    }
+    else {
+      setswitcher("live");
+      settimer(20);
+    }
       setNextbid(0)
       setbidamount(0)
-      settimer(20)
       
     })
 
@@ -117,11 +133,11 @@ export default function LiveAuction({ auction }) {
     }else{
       newamount=0.1*(biddingItem.starting_price)+nextbid;
     }
-    const message={timer:10, bidamount:nextbid, nextbid:newamount};
+    const message={timer:20, bidamount:nextbid, nextbid:newamount};
     socket.emit("detail_to_server",message);
     console.log(newamount)
     setNextbid(newamount)
-    settimer(10)
+    settimer(20)
 
     fetch("http://localhost:3003/api/auth/make_a_bid",{
       method: "POST",
@@ -144,7 +160,7 @@ export default function LiveAuction({ auction }) {
   }
 
   const [completed , setCompleted] = useState(auction.items.length === auction.currentBiddingItem)
-
+if(switcher=="live"){
   return (
     <div>
         {!completed ? 
@@ -180,7 +196,15 @@ export default function LiveAuction({ auction }) {
         }
 
     </div>
-  )
+  )}
+  else if(switcher=="hault"){
+    return(
+    <div className='flex-container'>
+        <div className='outer'>
+            <p className='completed'>Next item in {timer} second</p>
+          </div>
+    </div>)
+  }
 }
 
 
