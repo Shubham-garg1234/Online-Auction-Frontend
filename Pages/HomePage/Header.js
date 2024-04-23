@@ -44,7 +44,7 @@ const Header = ({onSwitcherChange}) => {
             <nav>
                 <ul className="navigation">
                     <li onClick={() => onSwitcherChange("History")}>History</li>
-                    <li onClick={() => onSwitcherChange("Live Auctions")}>Live Auctions</li>
+                    <li onClick={() => onSwitcherChange("Notifications")}>Notifications</li>
                     <li onClick={() => onSwitcherChange("Upcoming Auctions")}>Upcoming Auctions</li>
                     <li className="dropdown">
                         <div className="btn-group">

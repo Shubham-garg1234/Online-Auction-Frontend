@@ -3,6 +3,8 @@ import '../../assets/css/DialogBox.css';
 import Crausel from "./Crausel";
 import { Cloudinary } from "@cloudinary/url-gen";
 import UpcomingAuction from "./UpcomingAuction";
+import Notifications from "./Notifications";
+import addNotificationSelf from "../../assets/Utils/AddNotificationSelf";
 
 const Body = ({ switcher }) => {
   const [itemName, setItemName] = useState("");
@@ -63,16 +65,18 @@ const Body = ({ switcher }) => {
           return response.json()
         })
         .then(json => {
+          if(json.message){
+            const notifi = json.message
+            addNotificationSelf(notifi)
+            alert(notifi)
+          }else{
+            alert(json.error)
+          }
           setDescription("");
           setItemName("");
           setImage("");
           setStartingPrice("");
           setImagePreview("");
-          if(json.message){
-            alert(json.message)
-          }else{
-            alert(json.error)
-          }
         })
       })
       ;
@@ -166,10 +170,8 @@ const Body = ({ switcher }) => {
   );}
   else if(switcher=="Upcoming Auctions"){
     return(<UpcomingAuction/>)
-  }else if(switcher=="Live Auctions"){
-    return(<>
-    Live
-    </>)
+  }else if(switcher=="Notifications"){
+    return(<Notifications />)
   }else if(switcher=="History"){
     return(<>
     History
