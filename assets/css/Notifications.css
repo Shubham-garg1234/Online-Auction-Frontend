@@ -1,0 +1,35 @@
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the start */
+  height: 100vh;
+}
+
+.box {
+  background-color: white;
+  width: 50%;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  height: 70vh;
+  margin-top: 20px;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+.heading {
+  text-align: center;
+}
+
+.notifiBox {
+  border: 3px solid black;
+  border-radius: 5%;
+  width: 50%;
+  margin-top: 10px; /* Add margin between notifications */
+  padding: 10px;
+}
+
+.date {
+  text-align: right;
+}
+
