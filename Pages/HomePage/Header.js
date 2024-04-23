@@ -52,7 +52,7 @@ const Header = ({onSwitcherChange}) => {
                                 Welcome {user ? user.name : ''}
                             </div>
                             <ul className="dropdown-menu dropdown-menu-start">
-                                <li><button className="dropdown-item" type="button">Add Coins</button></li>
+                                <li><button className="dropdown-item" type="button" onClick={() => onSwitcherChange("Addcoins")}>Add Coins</button></li>
                                 <li><button className="dropdown-item" type="button">Accounts</button></li>
                                 <li><button className="dropdown-item" type="button">Logout</button></li>
                             </ul>
