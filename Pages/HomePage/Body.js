@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../../assets/css/DialogBox.css';
+import Addcoins from "./Addcoins";
 import Crausel from "./Crausel";
 import { Cloudinary } from "@cloudinary/url-gen";
 import UpcomingAuction from "./UpcomingAuction";
@@ -174,6 +175,8 @@ const Body = ({ switcher }) => {
     return(<>
     History
     </>)
+  }else if(switcher=="Addcoins"){
+    return(<Addcoins/>)
   }
 };
 

@@ -2,11 +2,21 @@ import { useEffect, useState } from "react";
 import '../../assets/css/AuctionCard.css'
 
 const AuctionCard = ({ details }) => {
-    const AuctionName=details.name;
+    const AuctionName = details.name;
+    const startTime = new Date(details.starting_time).getTime();
     const itemsArray = details.items.map(data => data.id); 
     const searchParams = new URLSearchParams(window.location.search);
     const token = searchParams.get("token");
     const [items, setItems] = useState(null);
+    const [time, setTime] = useState(Math.floor((startTime - Date.now()) / 1000));
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTime(prevTime => prevTime - 1);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         fetchDetails();
@@ -31,24 +41,35 @@ const AuctionCard = ({ details }) => {
         });
     }
 
+    const formatTime = (seconds) => {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = seconds % 60;
+        return `${hours}h ${minutes}m ${remainingSeconds}s`;
+    }
+
     return (
         <>
             <div className="AuctionCard-container">
-            <h1 className="auction-card-heading">{AuctionName}</h1>
-            {items && items.map((item, index) => (
-                <div className="AuctionCard-box" key={index}>
-                    <div>
-                    <h3>{index+1}. {item.name}</h3>
-                    <br></br>
-                    <br></br>
-                    <p><b>Description:</b> {item.description}</p>
-                    <p><b>Starting Price:</b> {item.starting_price} coins</p>
-                    </div>
-                    <div>
-                    <img src={item.image} />
-                    </div>
+                <div className="auction-card-heading-box">
+                <h1 className="auction-card-heading"></h1>
+                <h1 className="auction-card-heading">{AuctionName}</h1>
+                <h3 className="auction-card-heading">{formatTime(time)}</h3>
                 </div>
-            ))}
+                {items && items.map((item, index) => (
+                    <div className="AuctionCard-box" key={index}>
+                        <div>
+                            <h3>{index+1}. {item.name}</h3>
+                            <br></br>
+                            <br></br>
+                            <p><b>Description:</b> {item.description}</p>
+                            <p><b>Starting Price:</b> {item.starting_price} coins</p>
+                        </div>
+                        <div>
+                            <img src={item.image} alt={item.name} />
+                        </div>
+                    </div>
+                ))}
             </div>
         </>
     );
