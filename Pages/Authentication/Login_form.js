@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from './AuthLoader';
 import '../../assets/css/Auth.css';
 
 const LoginForm = () => {
 
 const [email,setemail]=useState('');
 const[pwd,setpwd]=useState('')
+const[switcher,setswitcher]=useState('login-page')
 
 
 
 const Login=(e)=>{
     e.preventDefault();
+    setswitcher('loader');
     fetch("http://localhost:3003/api/auth/login",{
         method: 'POST',
         headers: {
@@ -35,13 +38,15 @@ const Login=(e)=>{
  const handleGoogleSignin = (event) => {
   window.open("http://localhost:3003/auth/google-login" , "_self");
  }
-
   return (
     <div className="background" >
       <div className="shape"></div>
       <div className="shape"></div>
       <form className="AuthForm" onSubmit={Login}>
-        <h3>Login Here</h3>
+        { 
+        switcher=='loader' ? <Loader/> :<></>
+        }
+        <h3>Login</h3>
 
         <label htmlFor="Email" >Email</label>
         <input type="text" placeholder="Email" id="username" onChange={(e)=>{setemail(e.target.value)}} />

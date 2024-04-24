@@ -24,19 +24,32 @@ const Header = ({onSwitcherChange}) => {
           body: JSON.stringify({ token }),
         })
           .catch((err) => {
+            window.location.href = 'http://localhost:1234'
             console.log("Error is", err);
           })
           .then(data=>data.json())
           .then(
-            (data2) => (
-                console.log(data2),
-                setUser(data2.user)
-            )
+            (data2) => {
+                if(data2.error=="Token revoked"){
+                    window.location.href = 'http://localhost:1234'
+                }
+                setUser(data2.user)}
           )
       };
 
       const handleLogout = () => {
-        window.location.href = 'http://localhost:1234'
+        fetch("http://localhost:3003/api/auth/logout",{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": token
+          },
+          body: JSON.stringify({ message:"logout" }),
+        })
+          .catch((err) => {
+            console.log("Error is", err);
+          }).then(()=>{ window.location.href = 'http://localhost:1234'
+        })
       }
 
     return (

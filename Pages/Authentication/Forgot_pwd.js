@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../assets/css/Auth.css';
+import Loader from './AuthLoader';
 
 
   const Forgotpwd = () => {
@@ -13,6 +14,7 @@ import '../../assets/css/Auth.css';
 
   const sendotp=(e)=>{
       e.preventDefault();
+      setSwitcher('loader')
       fetch("http://localhost:3003/api/auth/forgot-pass", {
           method: 'POST',
           headers: {
@@ -27,10 +29,12 @@ import '../../assets/css/Auth.css';
           if (json.success) {       
               setSwitcher(1);
           } else {
+              setSwitcher(0);
               alert(json.error);
           }
       })
       .catch(error => {
+           setSwitcher(0);
           // Handle network errors or other issues
           console.error("Error:", error);
       });
@@ -38,6 +42,7 @@ import '../../assets/css/Auth.css';
 
   const verifyotp=(e)=>{
     e.preventDefault();
+    setSwitcher('loader')
     fetch("http://localhost:3003/api/auth/verify-otp", {
         method: 'POST',
         headers: {
@@ -52,11 +57,13 @@ import '../../assets/css/Auth.css';
         if (json.success) {       
             setSwitcher(2);
         } else {
+            setSwitcher(1);
             alert(json.error);
         }
     })
     .catch(error => {
         // Handle network errors or other issues
+        setSwitcher(1);
         console.error("Error:", error);
     });
   }
@@ -68,6 +75,7 @@ import '../../assets/css/Auth.css';
       return;
     }
     e.preventDefault();
+    setSwitcher('loader')
     fetch("http://localhost:3003/api/auth/reset-pass", {
         method: 'POST',
         headers: {
@@ -79,14 +87,17 @@ import '../../assets/css/Auth.css';
       return response.json();
     })
     .then(json => {
-        if (json.success) {       
+        if (json.success) {    
+            window.location.href = 'http://localhost:1234'
             alert('Password Reset Successful')
         } else {
+            setSwitcher(2)
             alert(json.error);
         }
     })
     .catch(error => {
         // Handle network errors or other issues
+        setSwitcher(2)
         console.error("Error:", error);
     });
   }
@@ -107,13 +118,15 @@ import '../../assets/css/Auth.css';
       </div>
     );
  }
- else if(switcher == 1){
+ else if(switcher == 1 || switcher=='loader'){
     return <div className="background">
       <div className="shape"></div>
       <div className="shape"></div>
       <form className="AuthForm">
-        <h3>Verify OTP</h3>
-
+        {switcher!='loader' ? <h3>Verify OTP</h3>:<></>}
+        { 
+        switcher=='loader' ? <Loader/> :<></>
+        }
         <label htmlFor="OTP" >OTP</label>
         <input type="text" placeholder="OTP" id="otpInput" value={otp} onChange={(e)=>{setOtp(e.target.value)}} />
 

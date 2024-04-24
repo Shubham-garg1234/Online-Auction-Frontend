@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../assets/css/Auth.css';
+import Loader from './AuthLoader';
 
 const Create_Account = () => {
 
@@ -16,6 +17,7 @@ const sendotp=(e)=>{
   if(pwd!=conpwd){
     window.alert("Password doesnot match");
   }else{
+    setswitcher('loader')
     fetch("http://localhost:3003/api/auth/send-otp",{
         method: 'POST',
         headers: {
@@ -31,10 +33,12 @@ const sendotp=(e)=>{
         setswitcher(2)
       }
       else{
+        setswitcher(0);
         alert(json.error)
       }
     })
     .catch((err)=>{
+      setswitcher(0);
       console.log(err);
     })
   }
@@ -42,7 +46,7 @@ const sendotp=(e)=>{
 
  const verifyotp=(e)=>{
   e.preventDefault();
-  console.log("GOTIT");
+      setswitcher('loader')
   fetch("http://localhost:3003/api/auth/signup",{
         method: 'POST',
         headers: {
@@ -55,13 +59,17 @@ const sendotp=(e)=>{
     })
     .then(json => {
       if(json.success){
-        //
-      }
+        window.location.href = 'http://localhost:1234'
+        alert('Account Created Successfully')
+        setswitcher(2);
+      } 
       else{
+        setswitcher(2);
         alert(json.error)
       }
     })
     .catch((err)=>{
+      setswitcher(2);
       console.log(err);
     })
  }
@@ -90,13 +98,13 @@ const ChangePage2=()=>{
       </form>
       </div>
     </div>
-  );}else if(switcher==1){
+  );}else if(switcher==1 || switcher=='loader'){
     return <div className="background">
       <div className="shape"></div>
       <div className="shape"></div>
       <form className="AuthForm">
-        <h3>Set Password</h3>
-
+        {switcher!='loader' ? <h3>Set Password</h3>:<></>}
+        {switcher=='loader' ? <Loader/>:<></>}
         <label htmlFor="UserName" >Password</label>
         <input type="password" placeholder="Password" id="username" onChange={(e)=>{setpwd(e.target.value)}} />
 
@@ -107,7 +115,7 @@ const ChangePage2=()=>{
         <button className="AuthButton" style={{marginTop:"15px" , width:"30%"}} onClick={ChangePage2}>Back</button>
       </form>
     </div>
-  }else if(switcher==2){
+  }else if(switcher==2 || switcher=='loader'){
     return <div className="background">
     <div className="shape"></div>
     <div className="shape"></div>
