@@ -32,6 +32,10 @@ const Login=(e)=>{
     })
  }
 
+ const handleGoogleSignin = (event) => {
+  window.open("http://localhost:3003/auth/google-login" , "_self");
+ }
+
   return (
     <div className="background" >
       <div className="shape"></div>
@@ -49,6 +53,7 @@ const Login=(e)=>{
             <div className="go"><i className="fab fa-google"></i> <Link to="/Forgot_password"> Forgot Password</Link> </div>
             <div className="fb"><i className="fab fa-facebook"></i>  <Link to="/Create_Account"> Create Account </Link></div>
         </div>
+        <button onClick = {handleGoogleSignin} class="google-signin-button">Sign in with Google</button>
       </form>
     </div>
   );

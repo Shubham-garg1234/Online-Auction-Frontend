@@ -35,6 +35,10 @@ const Header = ({onSwitcherChange}) => {
           )
       };
 
+      const handleLogout = () => {
+        window.location.href = 'http://localhost:1234'
+      }
+
     return (
         <header>
             <div className="logo">
@@ -54,7 +58,7 @@ const Header = ({onSwitcherChange}) => {
                             <ul className="dropdown-menu dropdown-menu-start">
                                 <li><button className="dropdown-item" type="button" onClick={() => onSwitcherChange("Addcoins")}>Add Coins</button></li>
                                 <li><button className="dropdown-item" type="button">Accounts</button></li>
-                                <li><button className="dropdown-item" type="button">Logout</button></li>
+                                <li><button className="dropdown-item" type="button" onClick = {handleLogout}>Logout</button></li>
                             </ul>
                         </div>
                     </li>

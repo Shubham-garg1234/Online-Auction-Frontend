@@ -10,26 +10,26 @@ export default function History() {
   const [transactions , setTransactions] = useState([])
 
   const fetchTransactions = async () => {
-      try {
-          
-          const response = await fetch(`http://localhost:3003/api/auth/fetchTransactions`, {
-            method: "GET",
-            headers: {
-                "content-type": "application/json",
-                "auth-token": token
-            },
-          });
-          const json = await response.json();
-          if(json.success)    setTransactions(json.transactions)
-          console.log(json);
+    try {
+        
+        const response = await fetch(`http://localhost:3003/api/auth/fetchTransactions`, {
+          method: "GET",
+          headers: {
+              "content-type": "application/json",
+              "auth-token": token
+          },
+        });
+        const json = await response.json();
+        if(json.success)    setTransactions(json.newTransactions)
+        console.log(json);
   
-      } catch (error) {
-          console.error("Error While Fetching Notification" , error)
-      }
+    } catch (error) {
+        console.error("Error While Fetching Transactions" , error)
     }
+  }
   
-    useEffect(() => {
-        //fetchTransactions()
+  useEffect(() => {
+    fetchTransactions()
   }, [])
 
   return (
@@ -41,9 +41,10 @@ export default function History() {
         {transactions.map((item , index) => (
           <div key = {index} className='transactionBox'>
             <div className='row1'>
-                <p>{item.name}</p>
-                <p>{item.amount} 🪙</p>
+                <p className='name1'>{item.itemName}</p>
+                <p className='amount'>{item.isSeller ? '+' : '-'}{item.amount} 🪙</p>
             </div>
+            <p className='date'>{formatDate(item.date)}</p>
           </div>
         ))}
       </div>

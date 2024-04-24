@@ -5,6 +5,7 @@ import Crausel from "./Crausel";
 import { Cloudinary } from "@cloudinary/url-gen";
 import UpcomingAuction from "./UpcomingAuction";
 import Notifications from "./Notifications";
+import History from "./History";
 import addNotificationSelf from "../../assets/Utils/AddNotificationSelf";
 
 const Body = ({ switcher }) => {
@@ -67,9 +68,7 @@ const Body = ({ switcher }) => {
         })
         .then(json => {
           if(json.message){
-            const notifi = json.message
-            addNotificationSelf(notifi)
-            alert(notifi)
+            alert(json.message)
           }else{
             alert(json.error)
           }
@@ -174,9 +173,7 @@ const Body = ({ switcher }) => {
   }else if(switcher=="Notifications"){
     return(<Notifications />)
   }else if(switcher=="History"){
-    return(<>
-    History
-    </>)
+    return(<History />)
   }else if(switcher=="Addcoins"){
     return(<Addcoins/>)
   }

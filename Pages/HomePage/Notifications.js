@@ -33,18 +33,18 @@ export default function Notifications() {
       }, [])
   
   return (
-    <div className='flex-container'>
-  <div className='box'>
-    <h1 className='heading'>Notifications</h1>
+    <div className='flex-container1'>
+      <div className='box'>
+        <h1 className='heading'>Notifications</h1>
 
-    {notifications.map((item , index) => (
-          <div className='notifiBox'>
+        {notifications.map((item , index) => (
+          <div key = {index} className='notifiBox'>
             <p>{item.message}</p>
             <p className='date'>{formatDate(item.date)}</p>
           </div>
-    ))}
-  </div>
-</div>
+        ))}
+      </div>
+    </div>
 
   )
 }
