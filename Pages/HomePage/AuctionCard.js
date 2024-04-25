@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import '../../assets/css/AuctionCard.css'
 import LiveAuction from "./LiveAuction";
 
-const AuctionCard = ({ details, auction }) => {
+const AuctionCard = ({ changeSwitcher , details, auction }) => {
     console.log(auction)
     const AuctionName = details.name;
     const startTime = new Date(details.starting_time).getTime();
@@ -62,6 +62,7 @@ const AuctionCard = ({ details, auction }) => {
     else{
     return (
         <>
+            <p onClick = {changeSwitcher} className="back">{'<- '}Back</p>
             <div className="AuctionCard-container">
                 <div className="auction-card-heading-box">
                     <h1 className="auction-card-heading"></h1>

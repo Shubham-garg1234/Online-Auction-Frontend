@@ -42,3 +42,13 @@
 .liveLabel{
   color: rgb(0, 128, 32)
 }
+.no-auction{
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  color: #ebdbdb;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+}

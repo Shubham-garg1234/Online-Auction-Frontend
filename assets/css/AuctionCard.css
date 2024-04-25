@@ -27,3 +27,14 @@
     width: 100%;
     justify-content: space-evenly;
 }
+.back{
+    color: white;
+    font-size: 20px;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.back:hover{
+    color: rgb(0, 204, 255);
+    cursor: pointer;
+}

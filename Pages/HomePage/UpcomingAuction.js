@@ -7,7 +7,7 @@ import LiveAuction from "./LiveAuction";
 const UpcomingAuction=()=>{
   const searchparams = new URLSearchParams(window.location.search);
   const token = searchparams.get("token");
-  const[Upcoming,setUpcoming]=useState(null);
+  const[Upcoming,setUpcoming]=useState({});
   const[ind,setind]=useState(null);
   const [switcher,setswitcher]=useState("Auction-List")
 
@@ -28,6 +28,9 @@ const openLiveAuction = (auction) => {
     setswitcher('Live-Auction')
 }
 
+const changeSwitcher = () => {
+    setswitcher('Auction-List')
+}
  
 const Getupcoming=()=>{
     fetch("http://localhost:3003/api/auth/getUpcoming",{
@@ -49,6 +52,7 @@ const Getupcoming=()=>{
           )
 }
     if(switcher=="Auction-List"){
+        if(Upcoming.length>0){
         return <>
         <div className="Auction-table-box">
             <br></br>
@@ -84,10 +88,13 @@ const Getupcoming=()=>{
                 </table>
             </div>
         </>
+        }else{
+            return <><div className="no-auction"> No Upcoming Auction </div></>
+        }
     }else if(switcher=="Auction-details"){
-        return <AuctionCard details={Upcoming[ind]} auction = {liveAuction} />
+        return <AuctionCard changeSwitcher = {changeSwitcher} details={Upcoming[ind]} auction = {liveAuction} />
     }else if(switcher=='Live-Auction'){
-        return <LiveAuction auction = {liveAuction} />
+        return <LiveAuction changeSwitcher = {changeSwitcher} auction = {liveAuction} />
     }
 } 
 export default UpcomingAuction;

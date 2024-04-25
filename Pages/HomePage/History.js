@@ -42,7 +42,7 @@ export default function History() {
           <div key = {index} className='transactionBox'>
             <div className='row1'>
                 <p className='name1'>{item.itemName}</p>
-                <p className='amount'>{item.isSeller ? '+' : '-'}{item.amount} 🪙</p>
+                <p className='amount'>{item.isSeller ? '+' : '-'}{item.isSeller ? item.amount : item.amount + item.amount * 0.1} 🪙</p>
             </div>
             <p className='date'>{formatDate(item.date)}</p>
           </div>

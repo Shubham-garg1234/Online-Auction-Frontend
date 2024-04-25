@@ -1,5 +1,9 @@
 .advertisement-column {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     max-width: 300px; /* Adjust as needed */
     margin: 0 auto;
     padding: 20px;
@@ -8,7 +12,11 @@
     max-height: 80vh;
     background-color: #f0f0f0;
   }
-  
+  .adv-line{
+    background-color: black;
+    width: 100%;
+    height: 3px;
+  }
   .ad-container {
     display: flex;
     flex-direction: column;
