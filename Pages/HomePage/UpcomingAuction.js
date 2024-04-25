@@ -27,6 +27,9 @@ const openLiveAuction = (auction) => {
     setswitcher('Live-Auction')
 }
 
+const changeSwitcher = () => {
+    setswitcher('Auction-List')
+}
  
 const Getupcoming=()=>{
     fetch("http://localhost:3003/api/auth/getUpcoming",{
@@ -84,9 +87,9 @@ const Getupcoming=()=>{
             </div>
         </>
     }else if(switcher=="Auction-details"){
-        return <AuctionCard details={Upcoming[ind]}/>
+        return <AuctionCard changeSwitcher = {changeSwitcher} details={Upcoming[ind]}/>
     }else if(switcher=='Live-Auction'){
-        return <LiveAuction auction = {liveAuction} />
+        return <LiveAuction changeSwitcher = {changeSwitcher} auction = {liveAuction} />
     }
 } 
 export default UpcomingAuction;

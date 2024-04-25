@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import '../../assets/css/AuctionCard.css'
 
-const AuctionCard = ({ details }) => {
+const AuctionCard = ({ changeSwitcher , details }) => {
     const AuctionName = details.name;
     const startTime = new Date(details.starting_time).getTime();
     const itemsArray = details.items.map(data => data.id); 
@@ -50,6 +50,7 @@ const AuctionCard = ({ details }) => {
 
     return (
         <>
+            <p onClick = {changeSwitcher} className="back">{'<- '}Back</p>
             <div className="AuctionCard-container">
                 <div className="auction-card-heading-box">
                 <h1 className="auction-card-heading"></h1>

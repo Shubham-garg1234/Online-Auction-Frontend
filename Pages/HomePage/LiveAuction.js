@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 
 const socket = io('http://localhost:3001');
 
-export default function LiveAuction({ auction }) {
+export default function LiveAuction({ changeSwitcher , auction }) {
 
   const auctionId=auction._id;
   const searchparams = new URLSearchParams(window.location.search);
@@ -163,6 +163,7 @@ export default function LiveAuction({ auction }) {
 if(switcher=="live"){
   return (
     <div>
+        <p onClick = {changeSwitcher} className="back">{'<- '}Back</p>
         {!completed ? 
           <div className='flex-container'>
               <div>
@@ -178,7 +179,7 @@ if(switcher=="live"){
               <div>
               <h2 className='itemName'>{biddingItem ? biddingItem.name : ''}</h2>
                 <div className='outer-image'>
-                  <img className='' src = {require('../../assets/images/th.jpeg')} />
+                  <img className='' src = {biddingItem ? biddingItem.image : ''} />
                   <div className='button-container'>
                     <button onClick = {make_a_bid} className='bid-button'>Make a bid of {nextbid === 0 && biddingItem !== null ? biddingItem.starting_price : nextbid}</button>
                 </div>
