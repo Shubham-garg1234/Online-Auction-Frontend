@@ -37,3 +37,18 @@
   box-shadow:2px 2px 2px 2px orange;
   width:100px;
 }
+
+.StickyNote{
+  background-color: rgba(250, 235, 215,0.4);
+  padding: 7px;
+  border-radius: 10px;
+  position: absolute;
+  font-family: "Comic Sans MS", cursive;
+  left:30;
+  width:25vw;
+  color:aliceblue;
+  transition: 0.3s;
+}
+.StickyNote:hover {
+  transform: scale(1.04);
+} 

@@ -1,20 +1,29 @@
 import { useEffect, useState } from "react";
 import '../../assets/css/AuctionCard.css'
+import LiveAuction from "./LiveAuction";
 
-const AuctionCard = ({ details }) => {
+const AuctionCard = ({ details, auction }) => {
+    console.log(auction)
     const AuctionName = details.name;
     const startTime = new Date(details.starting_time).getTime();
-    const itemsArray = details.items.map(data => data.id); 
+    const itemsArray = details.items.map(data => data.id);
     const searchParams = new URLSearchParams(window.location.search);
     const token = searchParams.get("token");
     const [items, setItems] = useState(null);
     const [time, setTime] = useState(Math.floor((startTime - Date.now()) / 1000));
+    const [showLiveAuction, setShowLiveAuction] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setTime(prevTime => prevTime - 1);
+            setTime(prevTime => {
+                if (prevTime === 1) {
+                    setShowLiveAuction(true);
+                    clearInterval(interval); 
+                    return 0; 
+                }
+                return prevTime - 1;
+            });
         }, 1000);
-
         return () => clearInterval(interval);
     }, []);
 
@@ -47,19 +56,22 @@ const AuctionCard = ({ details }) => {
         const remainingSeconds = seconds % 60;
         return `${hours}h ${minutes}m ${remainingSeconds}s`;
     }
-
+    if(showLiveAuction){
+        return <LiveAuction auction={auction}/>
+    }
+    else{
     return (
         <>
             <div className="AuctionCard-container">
                 <div className="auction-card-heading-box">
-                <h1 className="auction-card-heading"></h1>
-                <h1 className="auction-card-heading">{AuctionName}</h1>
-                <h3 className="auction-card-heading">{formatTime(time)}</h3>
+                    <h1 className="auction-card-heading"></h1>
+                    <h1 className="auction-card-heading">{AuctionName}</h1>
+                    <h3 className="auction-card-heading">{formatTime(time)}</h3>
                 </div>
                 {items && items.map((item, index) => (
                     <div className="AuctionCard-box" key={index}>
                         <div>
-                            <h3>{index+1}. {item.name}</h3>
+                            <h3>{index + 1}. {item.name}</h3>
                             <br></br>
                             <br></br>
                             <p><b>Description:</b> {item.description}</p>
@@ -73,6 +85,7 @@ const AuctionCard = ({ details }) => {
             </div>
         </>
     );
+}
 }
 
 export default AuctionCard;

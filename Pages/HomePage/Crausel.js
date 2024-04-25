@@ -1,6 +1,6 @@
 const Crausel=()=>{
 
-    const img1=require('../../assets/images/image.png');
+    const img1=require('../../assets/images/image.jpeg');
     const img2=require('../../assets/images/th (1).jpeg');
     const img3=require('../../assets/images/th (2).jpeg');
 

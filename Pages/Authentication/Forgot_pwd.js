@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import '../../assets/css/Auth.css';
 import Loader from './AuthLoader';
 
@@ -114,6 +115,11 @@ import Loader from './AuthLoader';
           <input type="text" placeholder="Email" id="username" onChange={(e)=>{setemail(e.target.value)}} />
 
           <button className="AuthButton">Send OTP</button>
+
+        <br></br>
+        <br></br>
+        <br></br>
+        <Link to="/">Sign in</Link>
         </form>
       </div>
     );

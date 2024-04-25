@@ -15,7 +15,8 @@ useEffect(()=>{
     Getupcoming();
 },[])
 
-const Auctiondetails=(index)=>{
+const Auctiondetails=(index,auction)=>{
+    setLiveAuction(auction)
     setind(index);
     setswitcher("Auction-details");
 }
@@ -74,7 +75,7 @@ const Getupcoming=()=>{
                                 {new Date(auction.starting_time).getTime() <= Date.now() ? (
                                     <button className="button-aution-table" onClick={() => openLiveAuction(auction)}>Join</button>
                                 ) : (
-                                    <button className="button-aution-table" onClick={() => Auctiondetails(index)}>View</button>
+                                    <button className="button-aution-table" onClick={() => Auctiondetails(index,auction)}>View</button>
                                 )}
                             </td>
                         </tr>
@@ -84,7 +85,7 @@ const Getupcoming=()=>{
             </div>
         </>
     }else if(switcher=="Auction-details"){
-        return <AuctionCard details={Upcoming[ind]}/>
+        return <AuctionCard details={Upcoming[ind]} auction = {liveAuction} />
     }else if(switcher=='Live-Auction'){
         return <LiveAuction auction = {liveAuction} />
     }

@@ -30,6 +30,7 @@ const Login=(e)=>{
         window.location.href = "http://localhost:1234/Home?token=" + token;
       }
       else{
+        setswitcher('login-page');
         alert(json.error)
       }
     })

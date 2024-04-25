@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import '../../assets/css/Auth.css';
 import Loader from './AuthLoader';
 
@@ -95,6 +96,10 @@ const ChangePage2=()=>{
         <input type="text" placeholder="Email" id="username" onChange={(e)=>{setemail(e.target.value)}} />
 
         <button className="AuthButton" onClick={ChangePage}>Next</button>
+        <br></br>
+        <br></br>
+        <br></br>
+        <Link to="/">Already have an Account</Link>
       </form>
       </div>
     </div>

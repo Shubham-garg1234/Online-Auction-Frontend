@@ -9,7 +9,7 @@ const Header = ({onSwitcherChange}) => {
 
     const searchparams = new URLSearchParams(window.location.search);
     const token = searchparams.get("token");
-    const logo = require('../../assets/images/th.jpeg');
+    const logo = require('../../assets/images/_d188e314-5479-4529-acad-ea7653f4a611.jpeg');
     const [user , setUser] = useState(null)
 
     const details = () => {
@@ -55,7 +55,7 @@ const Header = ({onSwitcherChange}) => {
     return (
         <header>
             <div className="logo">
-                <img src={logo} alt="Logo" style={{width:"20vh"}}/>
+                <img src={logo} alt="Logo" style={{width:"6vw", height:"13vh" , borderRadius:"50%"}}/>
                 <b onClick={() => onSwitcherChange("Home")} style={{cursor:"pointer" ,fontFamily:"Cambria", fontSize:"24px"}}> &nbsp; FastBid</b>
             </div>
             <nav>
