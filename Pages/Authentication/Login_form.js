@@ -27,7 +27,7 @@ const Login=(e)=>{
     .then(json => {
       if(json.success){
         const token=json.authToken;
-        window.location.href = "http://localhost:1234/Home?token=" + token;
+        window.location.href = "https://main--fastbid.netlify.app/Home?token=" + token;
       }
       else{
         setswitcher('login-page');
