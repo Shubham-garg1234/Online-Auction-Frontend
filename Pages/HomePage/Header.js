@@ -24,14 +24,14 @@ const Header = ({onSwitcherChange}) => {
           body: JSON.stringify({ token }),
         })
           .catch((err) => {
-            window.location.href = 'http://localhost:1234'
+            window.location.href = 'https://main--fastbid.netlify.app'
             console.log("Error is", err);
           })
           .then(data=>data.json())
           .then(
             (data2) => {
                 if(data2.error=="Token revoked"){
-                    window.location.href = 'http://localhost:1234'
+                    window.location.href = 'https://main--fastbid.netlify.app'
                 }
                 setUser(data2.user)}
           )
@@ -48,7 +48,7 @@ const Header = ({onSwitcherChange}) => {
         })
           .catch((err) => {
             console.log("Error is", err);
-          }).then(()=>{ window.location.href = 'http://localhost:1234'
+          }).then(()=>{ window.location.href = 'https://main--fastbid.netlify.app'
         })
       }
 

@@ -60,7 +60,7 @@ const sendotp=(e)=>{
     })
     .then(json => {
       if(json.success){
-        window.location.href = 'http://localhost:1234'
+        window.location.href = 'https://main--fastbid.netlify.app'
         alert('Account Created Successfully')
         setswitcher(2);
       } 

@@ -89,7 +89,7 @@ import Loader from './AuthLoader';
     })
     .then(json => {
         if (json.success) {    
-            window.location.href = 'http://localhost:1234'
+            window.location.href = 'https://main--fastbid.netlify.app'
             alert('Password Reset Successful')
         } else {
             setSwitcher(2)
