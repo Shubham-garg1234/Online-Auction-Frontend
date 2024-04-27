@@ -14,7 +14,7 @@ const[switcher,setswitcher]=useState('login-page')
 const Login=(e)=>{
     e.preventDefault();
     setswitcher('loader');
-    fetch("http://localhost:3003/api/auth/login",{
+    fetch("https://online-auction-backend.onrender.com/api/auth/login",{
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const Login=(e)=>{
  }
 
  const handleGoogleSignin = (event) => {
-  window.open("http://localhost:3003/auth/google-login" , "_self");
+  window.open("https://online-auction-backend.onrender.com/auth/google-login" , "_self");
  }
   return (
     <div className="background" >

@@ -15,7 +15,7 @@ const Header = ({onSwitcherChange}) => {
     const details = () => {
 
         
-        fetch("http://localhost:3003/api/auth/getdetails",{
+        fetch("https://online-auction-backend.onrender.com/api/auth/getdetails",{
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -38,7 +38,7 @@ const Header = ({onSwitcherChange}) => {
       };
 
       const handleLogout = () => {
-        fetch("http://localhost:3003/api/auth/logout",{
+        fetch("https://online-auction-backend.onrender.com/api/auth/logout",{
           method: "POST",
           headers: {
             "Content-Type": "application/json",

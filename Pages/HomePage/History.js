@@ -12,7 +12,7 @@ export default function History() {
   const fetchTransactions = async () => {
     try {
         
-        const response = await fetch(`http://localhost:3003/api/auth/fetchTransactions`, {
+        const response = await fetch(`https://online-auction-backend.onrender.com/api/auth/fetchTransactions`, {
           method: "GET",
           headers: {
               "content-type": "application/json",

@@ -21,7 +21,7 @@ export default function LiveAuction({ changeSwitcher , auction }) {
 
   // const fetchNextBiddingItem = () => {
   //   console.log("fetching");
-  //   fetch("http://localhost:3003/api/auth/fetchNextBiddingItem",{
+  //   fetch("https://online-auction-backend.onrender.com/api/auth/fetchNextBiddingItem",{
   //     method: "POST",
   //     headers: {
   //       "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export default function LiveAuction({ changeSwitcher , auction }) {
   
   const fetchBiddingItem = () => {
     
-    fetch("http://localhost:3003/api/auth/fetchBiddingItem",{
+    fetch("https://online-auction-backend.onrender.com/api/auth/fetchBiddingItem",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -139,7 +139,7 @@ export default function LiveAuction({ changeSwitcher , auction }) {
     setNextbid(newamount)
     settimer(20)
 
-    fetch("http://localhost:3003/api/auth/make_a_bid",{
+    fetch("https://online-auction-backend.onrender.com/api/auth/make_a_bid",{
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -32,7 +32,7 @@ const AuctionCard = ({ changeSwitcher , details, auction }) => {
     }, []);
 
     const fetchDetails = () => {
-        fetch("http://localhost:3003/api/auth/getItemsDetails", {
+        fetch("https://online-auction-backend.onrender.com/api/auth/getItemsDetails", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

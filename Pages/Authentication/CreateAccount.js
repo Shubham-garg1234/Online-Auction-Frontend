@@ -19,7 +19,7 @@ const sendotp=(e)=>{
     window.alert("Password doesnot match");
   }else{
     setswitcher('loader')
-    fetch("http://localhost:3003/api/auth/send-otp",{
+    fetch("https://online-auction-backend.onrender.com/api/auth/send-otp",{
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const sendotp=(e)=>{
  const verifyotp=(e)=>{
   e.preventDefault();
       setswitcher('loader')
-  fetch("http://localhost:3003/api/auth/signup",{
+  fetch("https://online-auction-backend.onrender.com/api/auth/signup",{
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',

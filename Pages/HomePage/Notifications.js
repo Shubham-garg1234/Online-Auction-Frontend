@@ -12,7 +12,7 @@ export default function Notifications() {
     const fetchNotifications = async () => {
         try {
             
-            const response = await fetch(`http://localhost:3003/api/auth/fetchNotifications`, {
+            const response = await fetch(`https://online-auction-backend.onrender.com/api/auth/fetchNotifications`, {
               method: "GET",
               headers: {
                   "content-type": "application/json",

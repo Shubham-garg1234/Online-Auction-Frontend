@@ -33,7 +33,7 @@ const changeSwitcher = () => {
 }
  
 const Getupcoming=()=>{
-    fetch("http://localhost:3003/api/auth/getUpcoming",{
+    fetch("https://online-auction-backend.onrender.com/api/auth/getUpcoming",{
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -19,7 +19,7 @@ const Addcoins = () => {
 
   const updatecoin=()=>{
     const addcoins=amount/100;
-    fetch("http://localhost:3003/updateCoins",{
+    fetch("https://online-auction-backend.onrender.com/updateCoins",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +33,7 @@ const Addcoins = () => {
       })
   }
   const handlePayNow = async (e) => {
-    const response = await fetch("http://localhost:3003/order", {
+    const response = await fetch("https://online-auction-backend.onrender.com/order", {
       method: "POST",
       body: JSON.stringify({
         amount
@@ -61,7 +61,7 @@ const Addcoins = () => {
         };
 
         const validateRes = await fetch(
-          "http://localhost:3003/order/validate",
+          "https://online-auction-backend.onrender.com/order/validate",
           {
             method: "POST",
             body: JSON.stringify(body),

@@ -57,7 +57,7 @@ const Body = ({ switcher }) => {
       })
       .then((url) => {
         console.log(url);
-        fetch("http://localhost:3003/api/auth/uploaditems", {
+        fetch("https://online-auction-backend.onrender.com/api/auth/uploaditems", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -16,7 +16,7 @@ import Loader from './AuthLoader';
   const sendotp=(e)=>{
       e.preventDefault();
       setSwitcher('loader')
-      fetch("http://localhost:3003/api/auth/forgot-pass", {
+      fetch("https://online-auction-backend.onrender.com/api/auth/forgot-pass", {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ import Loader from './AuthLoader';
   const verifyotp=(e)=>{
     e.preventDefault();
     setSwitcher('loader')
-    fetch("http://localhost:3003/api/auth/verify-otp", {
+    fetch("https://online-auction-backend.onrender.com/api/auth/verify-otp", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ import Loader from './AuthLoader';
     }
     e.preventDefault();
     setSwitcher('loader')
-    fetch("http://localhost:3003/api/auth/reset-pass", {
+    fetch("https://online-auction-backend.onrender.com/api/auth/reset-pass", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
